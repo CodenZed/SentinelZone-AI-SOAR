@@ -9,8 +9,15 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
+      # Disposable PostgreSQL used only by the automated test suite
       TEST_DATABASE_URL: postgresql+psycopg://ai_soar_test:test-only-password@localhost:5432/sentinelzone_ai_soar_test
-      POSTGRES_ADMIN_PASSWORD: test-only-admin-password
+
+      # Values required only so docker-compose.yml can be validated in CI.
+      # These are disposable CI-only credentials, not production secrets.
+      DB_NAME: ai_soar
+      DB_USER: ai_soar
+      POSTGRES_PASSWORD: ci-application-db-password
+      POSTGRES_ADMIN_PASSWORD: ci-admin-db-password
 
     services:
       postgres:
