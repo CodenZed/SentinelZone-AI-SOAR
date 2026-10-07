@@ -1,0 +1,17 @@
+protected_assets:
+  - splunk
+  - splunk01
+  - wazuh_manager
+  - pfsense
+  - domain_controller
+  - backup_server
+  - admin_host
+protected_roles:
+  - splunk
+  - wazuh_manager
+  - pfsense
+  - domain_controller
+  - backup
+  - backup_server
+  - admin_host
+protected_networks: []

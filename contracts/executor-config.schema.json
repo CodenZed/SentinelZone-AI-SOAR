@@ -1,0 +1,41 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "endpoint": {
+      "default": "",
+      "title": "Endpoint",
+      "type": "string"
+    },
+    "credential": {
+      "default": "",
+      "format": "password",
+      "title": "Credential",
+      "type": "string",
+      "writeOnly": true
+    },
+    "ca_file": {
+      "default": "",
+      "title": "Ca File",
+      "type": "string"
+    },
+    "contract_version": {
+      "default": "",
+      "title": "Contract Version",
+      "type": "string"
+    },
+    "workflow_id": {
+      "default": "",
+      "title": "Workflow Id",
+      "type": "string"
+    },
+    "timeout_seconds": {
+      "default": 60,
+      "exclusiveMinimum": 0,
+      "maximum": 300,
+      "title": "Timeout Seconds",
+      "type": "number"
+    }
+  },
+  "title": "ExternalExecutorConfig",
+  "type": "object"
+}

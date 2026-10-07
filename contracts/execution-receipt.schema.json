@@ -1,0 +1,44 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "proposal_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Proposal Id",
+      "type": "string"
+    },
+    "operation": {
+      "enum": [
+        "execute",
+        "rollback"
+      ],
+      "title": "Operation",
+      "type": "string"
+    },
+    "remote_operation_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "title": "Remote Operation Id",
+      "type": "string"
+    },
+    "dry_run": {
+      "title": "Dry Run",
+      "type": "boolean"
+    },
+    "accepted_at": {
+      "format": "date-time",
+      "title": "Accepted At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "proposal_id",
+    "operation",
+    "remote_operation_id",
+    "dry_run",
+    "accepted_at"
+  ],
+  "title": "ExecutionReceipt",
+  "type": "object"
+}

@@ -1,0 +1,45 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "source_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "enabled": {
+      "default": false,
+      "title": "Enabled",
+      "type": "boolean"
+    },
+    "endpoint": {
+      "default": "",
+      "maxLength": 2048,
+      "title": "Endpoint",
+      "type": "string"
+    },
+    "credential": {
+      "default": "",
+      "format": "password",
+      "title": "Credential",
+      "type": "string",
+      "writeOnly": true
+    },
+    "ca_file": {
+      "default": "",
+      "title": "Ca File",
+      "type": "string"
+    },
+    "contract_version": {
+      "default": "",
+      "title": "Contract Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "source_id"
+  ],
+  "title": "ConnectorConfig",
+  "type": "object"
+}

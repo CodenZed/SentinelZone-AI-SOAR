@@ -1,0 +1,46 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: ${DB_NAME:-ai_soar}
+      POSTGRES_PASSWORD: ${POSTGRES_ADMIN_PASSWORD:?Generate independent database administrator password}
+      APP_DATABASE_USER: ${DB_USER:-ai_soar}
+      APP_DATABASE_PASSWORD: ${POSTGRES_PASSWORD:?Generate application database password}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./deploy/init-db.sh:/docker-entrypoint-initdb.d/10-product-role.sh:ro
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U postgres -d "$${POSTGRES_DB}"']
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+  backend:
+    build: .
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://${DB_USER:-ai_soar}:${POSTGRES_PASSWORD:?Generate database password}@db:5432/${DB_NAME:-ai_soar}
+      AI_SOAR_BIND_ADDRESS: 0.0.0.0
+      AI_SOAR_PORT: 8004
+    depends_on:
+      db:
+        condition: service_healthy
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    restart: unless-stopped
+  frontend:
+    build: ./frontend
+    ports: ['${WEB_BIND:-127.0.0.1}:${WEB_PORT:-8080}:8080']
+    depends_on:
+      backend:
+        condition: service_healthy
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    restart: unless-stopped
+volumes:
+  postgres-data:

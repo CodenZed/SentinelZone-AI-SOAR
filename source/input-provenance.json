@@ -1,0 +1,27 @@
+{
+  "uploaded_baseline_commit": "f49b2064d8f78d763ebc21fdf47b6da5238950c7",
+  "bundle_tar_source_equal": true,
+  "historical_core_commit_not_current_contract": "0e1a1362d488979ee0f1a3552601c3a77acbb912",
+  "inputs": [
+    {
+      "name": "README.md",
+      "bytes": 3931,
+      "sha256": "4f0dd6136fbea875250c0153076ad6a7e84858eaaee74f3af88a8bb1e0274f8c"
+    },
+    {
+      "name": "VALIDATION_REPORT.md",
+      "bytes": 2843,
+      "sha256": "e140a44b7962280aeffa4ed4727e296ad5e005298abb3b27c269c91af81ec815"
+    },
+    {
+      "name": "sentinelzone-ai-soar-v0.29.0.bundle",
+      "bytes": 83264,
+      "sha256": "4d0c46c9110f207a2563dbb51c08bb00a5b125dcbee92cb5853115b6affde454"
+    },
+    {
+      "name": "sentinelzone-ai-soar-v0.29.0.tar.gz",
+      "bytes": 57056,
+      "sha256": "e92cb0c45cb9ad3d2b34f409decbacfd04483564fdaede4210cdeffcf93747e5"
+    }
+  ]
+}

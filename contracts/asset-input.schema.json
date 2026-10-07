@@ -1,0 +1,78 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "asset_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Asset Id",
+      "type": "string"
+    },
+    "criticality": {
+      "default": "unknown",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical",
+        "unknown"
+      ],
+      "title": "Criticality",
+      "type": "string"
+    },
+    "role": {
+      "anyOf": [
+        {
+          "maxLength": 100,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Role"
+    },
+    "addresses": {
+      "items": {
+        "maxLength": 128,
+        "type": "string"
+      },
+      "maxItems": 50,
+      "title": "Addresses",
+      "type": "array"
+    },
+    "aliases": {
+      "items": {
+        "maxLength": 128,
+        "minLength": 1,
+        "pattern": "^[A-Za-z0-9_.:-]+$",
+        "type": "string"
+      },
+      "maxItems": 50,
+      "title": "Aliases",
+      "type": "array"
+    },
+    "lab_asset": {
+      "default": false,
+      "title": "Lab Asset",
+      "type": "boolean"
+    },
+    "data_mode": {
+      "default": "UNKNOWN",
+      "enum": [
+        "REAL",
+        "TEST",
+        "REPLAY",
+        "UNKNOWN"
+      ],
+      "title": "Data Mode",
+      "type": "string"
+    }
+  },
+  "required": [
+    "asset_id"
+  ],
+  "title": "AssetIn",
+  "type": "object"
+}

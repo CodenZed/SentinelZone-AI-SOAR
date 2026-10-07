@@ -1,0 +1,9 @@
+{
+  "events": {"events": [
+    {"source_id": "demo", "external_id": "test-login-001", "event_time": "2026-01-01T12:00:00Z", "summary": "TEST: five synthetic failed sign-in attempts from 192.0.2.25. This is training evidence, not a real intrusion.", "priority": "high", "data_mode": "TEST", "provenance": {"generator": "deterministic-demo-v1"}},
+    {"source_id": "demo", "external_id": "test-network-001", "event_time": "2026-01-01T12:01:00Z", "summary": "TEST: synthetic outbound connection observation to 192.0.2.25. Process and identity telemetry were not supplied.", "priority": "medium", "data_mode": "TEST", "provenance": {"generator": "deterministic-demo-v1"}}
+  ]},
+  "incidents": {"incidents": [
+    {"source_id": "demo", "external_id": "test-investigation-001", "title": "Training: suspicious sign-in activity", "summary": "TEST exercise with two selected synthetic observations. Malicious activity is UNKNOWN.", "status": "open", "priority": "high", "data_mode": "TEST", "events": [{"source_id": "demo", "external_id": "test-login-001"}, {"source_id": "demo", "external_id": "test-network-001"}], "missing_telemetry": ["Endpoint process telemetry: UNKNOWN", "Identity confirmation: UNKNOWN"], "provenance": {"generator": "deterministic-demo-v1"}}
+  ]}
+}

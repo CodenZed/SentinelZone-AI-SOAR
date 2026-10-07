@@ -1,0 +1,104 @@
+{
+  "$defs": {
+    "EventIn": {
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "Source Id",
+          "type": "string"
+        },
+        "external_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "External Id",
+          "type": "string"
+        },
+        "event_time": {
+          "format": "date-time",
+          "title": "Event Time",
+          "type": "string"
+        },
+        "summary": {
+          "anyOf": [
+            {
+              "maxLength": 8000,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Summary"
+        },
+        "priority": {
+          "default": "UNKNOWN",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical",
+            "UNKNOWN"
+          ],
+          "title": "Priority",
+          "type": "string"
+        },
+        "data_mode": {
+          "default": "UNKNOWN",
+          "enum": [
+            "REAL",
+            "TEST",
+            "REPLAY",
+            "UNKNOWN"
+          ],
+          "title": "Data Mode",
+          "type": "string"
+        },
+        "provenance": {
+          "maxProperties": 20,
+          "patternProperties": {
+            "^[A-Za-z0-9_.:-]+$": {
+              "maxLength": 500,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "propertyNames": {
+            "maxLength": 128,
+            "minLength": 1
+          },
+          "title": "Provenance",
+          "type": "object"
+        }
+      },
+      "required": [
+        "source_id",
+        "external_id",
+        "event_time"
+      ],
+      "title": "EventIn",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "events": {
+      "items": {
+        "$ref": "#/$defs/EventIn"
+      },
+      "maxItems": 100,
+      "minItems": 1,
+      "title": "Events",
+      "type": "array"
+    }
+  },
+  "required": [
+    "events"
+  ],
+  "title": "EventBatch",
+  "type": "object"
+}

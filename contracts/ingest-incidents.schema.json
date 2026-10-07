@@ -1,0 +1,486 @@
+{
+  "$defs": {
+    "ConnectionSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "local_address": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Local Address"
+        },
+        "remote_address": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Remote Address"
+        },
+        "state": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "State"
+        },
+        "process_name": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Process Name"
+        }
+      },
+      "title": "ConnectionSummary",
+      "type": "object"
+    },
+    "IncidentIn": {
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "Source Id",
+          "type": "string"
+        },
+        "external_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "External Id",
+          "type": "string"
+        },
+        "title": {
+          "maxLength": 300,
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "summary": {
+          "anyOf": [
+            {
+              "maxLength": 8000,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Summary"
+        },
+        "status": {
+          "default": "UNKNOWN",
+          "enum": [
+            "open",
+            "investigating",
+            "closed",
+            "UNKNOWN"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "priority": {
+          "default": "UNKNOWN",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical",
+            "UNKNOWN"
+          ],
+          "title": "Priority",
+          "type": "string"
+        },
+        "data_mode": {
+          "default": "UNKNOWN",
+          "enum": [
+            "REAL",
+            "TEST",
+            "REPLAY",
+            "UNKNOWN"
+          ],
+          "title": "Data Mode",
+          "type": "string"
+        },
+        "events": {
+          "items": {
+            "$ref": "#/$defs/Origin"
+          },
+          "maxItems": 500,
+          "title": "Events",
+          "type": "array"
+        },
+        "asset_ids": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_.:-]+$",
+            "type": "string"
+          },
+          "maxItems": 100,
+          "title": "Asset Ids",
+          "type": "array"
+        },
+        "telemetry": {
+          "items": {
+            "$ref": "#/$defs/TelemetryContext"
+          },
+          "maxItems": 100,
+          "title": "Telemetry",
+          "type": "array"
+        },
+        "identity_context": {
+          "items": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 100,
+          "title": "Identity Context",
+          "type": "array"
+        },
+        "missing_telemetry": {
+          "items": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 100,
+          "title": "Missing Telemetry",
+          "type": "array"
+        },
+        "provenance": {
+          "maxProperties": 20,
+          "patternProperties": {
+            "^[A-Za-z0-9_.:-]+$": {
+              "maxLength": 500,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "propertyNames": {
+            "maxLength": 128,
+            "minLength": 1
+          },
+          "title": "Provenance",
+          "type": "object"
+        }
+      },
+      "required": [
+        "source_id",
+        "external_id",
+        "title"
+      ],
+      "title": "IncidentIn",
+      "type": "object"
+    },
+    "Origin": {
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "Source Id",
+          "type": "string"
+        },
+        "external_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "External Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "external_id"
+      ],
+      "title": "Origin",
+      "type": "object"
+    },
+    "ProcessSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "maxLength": 256,
+          "title": "Name",
+          "type": "string"
+        },
+        "pid": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pid"
+        },
+        "cpu": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cpu"
+        },
+        "ram": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ram"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "ProcessSummary",
+      "type": "object"
+    },
+    "TelemetryContext": {
+      "additionalProperties": false,
+      "properties": {
+        "host": {
+          "maxLength": 256,
+          "title": "Host",
+          "type": "string"
+        },
+        "platform": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Platform"
+        },
+        "agent_id": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Agent Id"
+        },
+        "cpu": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cpu"
+        },
+        "ram": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ram"
+        },
+        "gpu": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gpu"
+        },
+        "temperature": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Temperature"
+        },
+        "processes": {
+          "items": {
+            "$ref": "#/$defs/ProcessSummary"
+          },
+          "maxItems": 30,
+          "title": "Processes",
+          "type": "array"
+        },
+        "network_connections": {
+          "items": {
+            "$ref": "#/$defs/ConnectionSummary"
+          },
+          "maxItems": 30,
+          "title": "Network Connections",
+          "type": "array"
+        },
+        "persistence_observations": {
+          "items": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 30,
+          "title": "Persistence Observations",
+          "type": "array"
+        },
+        "sensor_availability": {
+          "additionalProperties": {
+            "enum": [
+              "available",
+              "unavailable",
+              "unknown"
+            ],
+            "type": "string"
+          },
+          "maxProperties": 30,
+          "title": "Sensor Availability",
+          "type": "object"
+        },
+        "security_risk": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Security Risk"
+        },
+        "resource_impact": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Resource Impact"
+        },
+        "reasons": {
+          "items": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 30,
+          "title": "Reasons",
+          "type": "array"
+        },
+        "last_seen": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Last Seen"
+        },
+        "availability": {
+          "default": "unknown",
+          "enum": [
+            "available",
+            "unavailable",
+            "unknown"
+          ],
+          "title": "Availability",
+          "type": "string"
+        }
+      },
+      "required": [
+        "host"
+      ],
+      "title": "TelemetryContext",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "incidents": {
+      "items": {
+        "$ref": "#/$defs/IncidentIn"
+      },
+      "maxItems": 20,
+      "minItems": 1,
+      "title": "Incidents",
+      "type": "array"
+    }
+  },
+  "required": [
+    "incidents"
+  ],
+  "title": "IncidentBatch",
+  "type": "object"
+}

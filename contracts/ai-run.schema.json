@@ -1,0 +1,428 @@
+{
+  "$defs": {
+    "AIOutput": {
+      "additionalProperties": false,
+      "properties": {
+        "observed_facts": {
+          "items": {
+            "$ref": "#/$defs/Fact"
+          },
+          "maxItems": 50,
+          "title": "Observed Facts",
+          "type": "array"
+        },
+        "hypotheses": {
+          "items": {
+            "$ref": "#/$defs/Hypothesis"
+          },
+          "maxItems": 20,
+          "title": "Hypotheses",
+          "type": "array"
+        },
+        "missing_evidence": {
+          "items": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 100,
+          "title": "Missing Evidence",
+          "type": "array"
+        },
+        "recommended_investigation": {
+          "items": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 30,
+          "title": "Recommended Investigation",
+          "type": "array"
+        },
+        "containment_options": {
+          "items": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 20,
+          "title": "Containment Options",
+          "type": "array"
+        }
+      },
+      "required": [
+        "observed_facts",
+        "hypotheses",
+        "missing_evidence",
+        "recommended_investigation",
+        "containment_options"
+      ],
+      "title": "AIOutput",
+      "type": "object"
+    },
+    "Citation": {
+      "additionalProperties": false,
+      "properties": {
+        "event_uid": {
+          "title": "Event Uid",
+          "type": "string"
+        },
+        "incident_id": {
+          "title": "Incident Id",
+          "type": "string"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "event_time": {
+          "format": "date-time",
+          "title": "Event Time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_uid",
+        "incident_id",
+        "source",
+        "event_time"
+      ],
+      "title": "Citation",
+      "type": "object"
+    },
+    "Fact": {
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "evidence_event_ids": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_.:-]+$",
+            "type": "string"
+          },
+          "maxItems": 20,
+          "minItems": 1,
+          "title": "Evidence Event Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "text",
+        "evidence_event_ids"
+      ],
+      "title": "Fact",
+      "type": "object"
+    },
+    "Hypothesis": {
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "limitations": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Limitations",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "limitations"
+      ],
+      "title": "Hypothesis",
+      "type": "object"
+    },
+    "StepView": {
+      "additionalProperties": false,
+      "properties": {
+        "sequence": {
+          "title": "Sequence",
+          "type": "integer"
+        },
+        "stage": {
+          "title": "Stage",
+          "type": "string"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "duration_ms": {
+          "title": "Duration Ms",
+          "type": "integer"
+        },
+        "tool_name": {
+          "title": "Tool Name",
+          "type": "string"
+        },
+        "output_ref": {
+          "title": "Output Ref",
+          "type": "string"
+        },
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "sequence",
+        "stage",
+        "status",
+        "duration_ms",
+        "tool_name",
+        "output_ref",
+        "evidence_ids"
+      ],
+      "title": "StepView",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "run_id": {
+      "title": "Run Id",
+      "type": "string"
+    },
+    "incident_id": {
+      "title": "Incident Id",
+      "type": "string"
+    },
+    "tenant_id": {
+      "title": "Tenant Id",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "running",
+        "completed",
+        "invalid",
+        "rejected",
+        "failed"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "trusted": {
+      "title": "Trusted",
+      "type": "boolean"
+    },
+    "validation_status": {
+      "enum": [
+        "pending",
+        "valid",
+        "invalid",
+        "unavailable"
+      ],
+      "title": "Validation Status",
+      "type": "string"
+    },
+    "provider": {
+      "title": "Provider",
+      "type": "string"
+    },
+    "model": {
+      "title": "Model",
+      "type": "string"
+    },
+    "error_code": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Error Code"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "completed_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Completed At"
+    },
+    "data_mode": {
+      "enum": [
+        "REAL",
+        "TEST",
+        "REPLAY",
+        "UNKNOWN"
+      ],
+      "title": "Data Mode",
+      "type": "string"
+    },
+    "observed_facts": {
+      "anyOf": [
+        {
+          "items": {
+            "$ref": "#/$defs/Fact"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Observed Facts"
+    },
+    "hypotheses": {
+      "anyOf": [
+        {
+          "items": {
+            "$ref": "#/$defs/Hypothesis"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Hypotheses"
+    },
+    "missing_evidence": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Missing Evidence"
+    },
+    "recommended_investigation": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Recommended Investigation"
+    },
+    "containment_options": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Containment Options"
+    },
+    "citations": {
+      "items": {
+        "$ref": "#/$defs/Citation"
+      },
+      "title": "Citations",
+      "type": "array"
+    },
+    "human_review_required": {
+      "const": true,
+      "default": true,
+      "title": "Human Review Required",
+      "type": "boolean"
+    },
+    "analysis": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/AIOutput"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "validation": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Validation"
+    },
+    "context_snapshot": {
+      "additionalProperties": true,
+      "title": "Context Snapshot",
+      "type": "object"
+    },
+    "steps": {
+      "items": {
+        "$ref": "#/$defs/StepView"
+      },
+      "title": "Steps",
+      "type": "array"
+    }
+  },
+  "required": [
+    "run_id",
+    "incident_id",
+    "tenant_id",
+    "status",
+    "trusted",
+    "validation_status",
+    "provider",
+    "model",
+    "error_code",
+    "created_at",
+    "started_at",
+    "completed_at",
+    "data_mode",
+    "observed_facts",
+    "hypotheses",
+    "missing_evidence",
+    "recommended_investigation",
+    "containment_options",
+    "citations",
+    "analysis",
+    "validation",
+    "context_snapshot",
+    "steps"
+  ],
+  "title": "AIRunView",
+  "type": "object"
+}

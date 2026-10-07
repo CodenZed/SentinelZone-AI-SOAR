@@ -1,0 +1,143 @@
+{
+  "$defs": {
+    "Condition": {
+      "additionalProperties": false,
+      "properties": {
+        "field": {
+          "enum": [
+            "action_type",
+            "target",
+            "parameters.lab_only"
+          ],
+          "title": "Field",
+          "type": "string"
+        },
+        "equals": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
+          ],
+          "title": "Equals"
+        }
+      },
+      "required": [
+        "field",
+        "equals"
+      ],
+      "title": "Condition",
+      "type": "object"
+    },
+    "PlaybookStep": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "Id",
+          "type": "string"
+        },
+        "action": {
+          "enum": [
+            "validate_target",
+            "human_approval",
+            "windows_firewall_block",
+            "suspend_test_process",
+            "verify_block",
+            "verify_process",
+            "rollback_block",
+            "rollback_process",
+            "branch"
+          ],
+          "title": "Action",
+          "type": "string"
+        },
+        "depends_on": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_.:-]+$",
+            "type": "string"
+          },
+          "maxItems": 20,
+          "title": "Depends On",
+          "type": "array"
+        },
+        "requires_approval": {
+          "default": false,
+          "title": "Requires Approval",
+          "type": "boolean"
+        },
+        "condition": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Condition"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "id",
+        "action"
+      ],
+      "title": "PlaybookStep",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Id",
+      "type": "string"
+    },
+    "name": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "version": {
+      "maxLength": 50,
+      "minLength": 1,
+      "title": "Version",
+      "type": "string"
+    },
+    "action_type": {
+      "enum": [
+        "BLOCK_IP",
+        "SUSPEND_TEST_PROCESS"
+      ],
+      "title": "Action Type",
+      "type": "string"
+    },
+    "steps": {
+      "items": {
+        "$ref": "#/$defs/PlaybookStep"
+      },
+      "maxItems": 30,
+      "minItems": 5,
+      "title": "Steps",
+      "type": "array"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "version",
+    "action_type",
+    "steps"
+  ],
+  "title": "Playbook",
+  "type": "object"
+}

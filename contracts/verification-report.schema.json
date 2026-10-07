@@ -1,0 +1,66 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "proposal_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Proposal Id",
+      "type": "string"
+    },
+    "target": {
+      "title": "Target",
+      "type": "string"
+    },
+    "action_type": {
+      "enum": [
+        "BLOCK_IP",
+        "SUSPEND_TEST_PROCESS"
+      ],
+      "title": "Action Type",
+      "type": "string"
+    },
+    "restored": {
+      "title": "Restored",
+      "type": "boolean"
+    },
+    "verified": {
+      "title": "Verified",
+      "type": "boolean"
+    },
+    "dry_run": {
+      "title": "Dry Run",
+      "type": "boolean"
+    },
+    "queried_at": {
+      "format": "date-time",
+      "title": "Queried At",
+      "type": "string"
+    },
+    "observation": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "title": "Observation",
+      "type": "string"
+    },
+    "query_reference": {
+      "maxLength": 256,
+      "minLength": 1,
+      "title": "Query Reference",
+      "type": "string"
+    }
+  },
+  "required": [
+    "proposal_id",
+    "target",
+    "action_type",
+    "restored",
+    "verified",
+    "dry_run",
+    "queried_at",
+    "observation",
+    "query_reference"
+  ],
+  "title": "VerificationReport",
+  "type": "object"
+}

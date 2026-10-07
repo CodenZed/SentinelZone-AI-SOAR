@@ -1,0 +1,4 @@
+# Optional PostgreSQL port for native development, independent database only.
+services:
+  db:
+    ports: ["127.0.0.1:5544:5432"]

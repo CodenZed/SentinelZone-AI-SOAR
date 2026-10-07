@@ -1,0 +1,126 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "proposal_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Proposal Id",
+      "type": "string"
+    },
+    "tenant_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Tenant Id",
+      "type": "string"
+    },
+    "incident_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Incident Id",
+      "type": "string"
+    },
+    "action_type": {
+      "enum": [
+        "BLOCK_IP",
+        "SUSPEND_TEST_PROCESS"
+      ],
+      "title": "Action Type",
+      "type": "string"
+    },
+    "target": {
+      "title": "Target",
+      "type": "string"
+    },
+    "parameters": {
+      "additionalProperties": true,
+      "title": "Parameters",
+      "type": "object"
+    },
+    "requested_by": {
+      "title": "Requested By",
+      "type": "string"
+    },
+    "approved_by": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Approved By"
+    },
+    "status": {
+      "title": "Status",
+      "type": "string"
+    },
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "rollback_available": {
+      "title": "Rollback Available",
+      "type": "boolean"
+    },
+    "dry_run": {
+      "title": "Dry Run",
+      "type": "boolean"
+    },
+    "executor": {
+      "title": "Executor",
+      "type": "string"
+    },
+    "effect_scope": {
+      "enum": [
+        "simulated",
+        "live"
+      ],
+      "title": "Effect Scope",
+      "type": "string"
+    },
+    "approval_status": {
+      "enum": [
+        "pending",
+        "approved",
+        "rejected"
+      ],
+      "title": "Approval Status",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "playbook_id": {
+      "title": "Playbook Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "proposal_id",
+    "tenant_id",
+    "incident_id",
+    "action_type",
+    "target",
+    "parameters",
+    "requested_by",
+    "approved_by",
+    "status",
+    "expires_at",
+    "rollback_available",
+    "dry_run",
+    "executor",
+    "effect_scope",
+    "approval_status",
+    "created_at",
+    "playbook_id"
+  ],
+  "title": "ActionProposal",
+  "type": "object"
+}

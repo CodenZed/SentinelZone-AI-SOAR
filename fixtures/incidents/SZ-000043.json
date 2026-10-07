@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0",
+  "incident_id": "SZ-000043",
+  "tenant_id": "lab",
+  "status": "INVESTIGATING",
+  "priority": "high",
+  "summary": "Synthetic lab investigation",
+  "assets": [
+    {
+      "asset_id": "CLIENT01",
+      "tenant_id": "lab",
+      "criticality": "medium",
+      "role": "test_endpoint",
+      "addresses": [
+        "192.0.2.10"
+      ],
+      "aliases": [
+        "client01.lab.invalid"
+      ]
+    }
+  ],
+  "identity_context": [],
+  "timeline": [
+    {
+      "timestamp": "2026-01-01T12:00:00Z",
+      "kind": "incident",
+      "summary": "Synthetic incident opened"
+    }
+  ],
+  "evidence": [
+    {
+      "event_uid": "EVT-OTHER",
+      "incident_id": "SZ-000043",
+      "tenant_id": "lab",
+      "source": "wazuh",
+      "event_time": "2026-01-01T12:00:00Z",
+      "summary": "A test process was observed on the lab endpoint.",
+      "priority": "high",
+      "data_classification": "UNTRUSTED EVENT DATA"
+    }
+  ],
+  "correlation_reasons": [
+    "SAME_ASSET"
+  ],
+  "missing_telemetry": [
+    "GPU telemetry: UNKNOWN",
+    "Identity context: UNKNOWN"
+  ],
+  "data_mode": "TEST"
+}

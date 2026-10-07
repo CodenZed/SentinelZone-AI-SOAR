@@ -1,0 +1,114 @@
+{
+  "$defs": {
+    "Fact": {
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "evidence_event_ids": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_.:-]+$",
+            "type": "string"
+          },
+          "maxItems": 20,
+          "minItems": 1,
+          "title": "Evidence Event Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "text",
+        "evidence_event_ids"
+      ],
+      "title": "Fact",
+      "type": "object"
+    },
+    "Hypothesis": {
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "limitations": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Limitations",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "limitations"
+      ],
+      "title": "Hypothesis",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "observed_facts": {
+      "items": {
+        "$ref": "#/$defs/Fact"
+      },
+      "maxItems": 50,
+      "title": "Observed Facts",
+      "type": "array"
+    },
+    "hypotheses": {
+      "items": {
+        "$ref": "#/$defs/Hypothesis"
+      },
+      "maxItems": 20,
+      "title": "Hypotheses",
+      "type": "array"
+    },
+    "missing_evidence": {
+      "items": {
+        "maxLength": 2000,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 100,
+      "title": "Missing Evidence",
+      "type": "array"
+    },
+    "recommended_investigation": {
+      "items": {
+        "maxLength": 2000,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 30,
+      "title": "Recommended Investigation",
+      "type": "array"
+    },
+    "containment_options": {
+      "items": {
+        "maxLength": 2000,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 20,
+      "title": "Containment Options",
+      "type": "array"
+    }
+  },
+  "required": [
+    "observed_facts",
+    "hypotheses",
+    "missing_evidence",
+    "recommended_investigation",
+    "containment_options"
+  ],
+  "title": "AIOutput",
+  "type": "object"
+}

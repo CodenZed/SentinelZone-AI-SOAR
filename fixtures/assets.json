@@ -1,0 +1,38 @@
+[
+  {
+    "asset_id": "CLIENT01",
+    "tenant_id": "lab",
+    "criticality": "medium",
+    "role": "test_endpoint",
+    "addresses": [
+      "192.0.2.10"
+    ],
+    "aliases": [
+      "client01.lab.invalid"
+    ],
+    "lab_asset": true
+  },
+  {
+    "asset_id": "SPLUNK01",
+    "tenant_id": "lab",
+    "criticality": "critical",
+    "role": "splunk",
+    "addresses": [
+      "192.0.2.50"
+    ],
+    "aliases": [
+      "splunk"
+    ]
+  },
+  {
+    "asset_id": "FOREIGN01",
+    "tenant_id": "other",
+    "criticality": "medium",
+    "role": "test_endpoint",
+    "addresses": [
+      "198.51.100.10"
+    ],
+    "aliases": [],
+    "lab_asset": true
+  }
+]

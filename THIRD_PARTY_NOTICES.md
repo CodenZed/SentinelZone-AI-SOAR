@@ -1,0 +1,44 @@
+# Third-party notices
+
+Dependency versions below were installed and tested from requirements.lock.txt. Only available license/notice files and metadata are copied; missing metadata is recorded, never invented. Python distributions are installed at deployment, not vendored. Container/base OS licenses are outside this Python SBOM.
+
+- **alembic 1.20.0** — MIT. Files: `licenses/dependencies/alembic/LICENSE`
+- **annotated-doc 0.0.5** — MIT. Files: `licenses/dependencies/annotated-doc/LICENSE`
+- **annotated-types 0.8.0** — MIT. Files: `licenses/dependencies/annotated-types/LICENSE`
+- **anyio 4.15.1** — MIT. Files: `licenses/dependencies/anyio/LICENSE`
+- **attrs 26.1.0** — MIT. Files: `licenses/dependencies/attrs/LICENSE`
+- **certifi 2026.7.22** — MPL-2.0. Files: `licenses/dependencies/certifi/LICENSE`
+- **click 8.5.0** — BSD-3-Clause. Files: `licenses/dependencies/click/LICENSE.txt`
+- **colorama 0.4.6** — UNKNOWN. Files: `licenses/dependencies/colorama/LICENSE.txt`
+- **fastapi 0.142.2** — MIT. Files: `licenses/dependencies/fastapi/LICENSE`
+- **h11 0.16.0** — MIT. Files: `licenses/dependencies/h11/LICENSE.txt`
+- **httpcore 1.0.9** — BSD-3-Clause. Files: `licenses/dependencies/httpcore/LICENSE.md`
+- **httpx 0.28.1** — BSD-3-Clause. Files: `licenses/dependencies/httpx/LICENSE.md`
+- **idna 3.20** — BSD-3-Clause. Files: `licenses/dependencies/idna/LICENSE.md`
+- **iniconfig 2.3.0** — MIT. Files: `licenses/dependencies/iniconfig/LICENSE`
+- **jsonschema 4.26.0** — MIT. Files: `licenses/dependencies/jsonschema/COPYING`
+- **jsonschema-specifications 2025.9.1** — MIT. Files: `licenses/dependencies/jsonschema-specifications/COPYING`
+- **mako 1.4.3** — MIT. Files: `licenses/dependencies/mako/LICENSE`
+- **markupsafe 3.0.4** — BSD-3-Clause. Files: `licenses/dependencies/markupsafe/LICENSE.txt`
+- **opentelemetry-api 1.45.0** — Apache-2.0. Files: `licenses/dependencies/opentelemetry-api/LICENSE`
+- **packaging 26.3** — Apache-2.0 OR BSD-2-Clause. Files: `licenses/dependencies/packaging/LICENSE`, `licenses/dependencies/packaging/LICENSE.APACHE`, `licenses/dependencies/packaging/LICENSE.BSD`
+- **pluggy 1.6.0** — MIT. Files: `licenses/dependencies/pluggy/LICENSE`
+- **psycopg 3.3.6** — LGPL-3.0-only. Files: `licenses/dependencies/psycopg/LICENSE.txt`
+- **psycopg-binary 3.3.6** — LGPL-3.0-only. Files: `licenses/dependencies/psycopg-binary/LICENSE.txt`
+- **pydantic 2.13.5** — MIT. Files: `licenses/dependencies/pydantic/LICENSE`
+- **pydantic-settings 2.15.0** — MIT. Files: `licenses/dependencies/pydantic-settings/LICENSE`
+- **pydantic-core 2.46.5** — MIT. Files: `licenses/dependencies/pydantic-core/LICENSE`
+- **pygments 2.21.0** — BSD-2-Clause. Files: `licenses/dependencies/pygments/LICENSE`
+- **pytest 9.1.1** — MIT. Files: `licenses/dependencies/pytest/LICENSE`
+- **pytest-asyncio 1.4.0** — Apache-2.0. Files: `licenses/dependencies/pytest-asyncio/LICENSE`
+- **python-dotenv 1.2.4** — BSD-3-Clause. Files: `licenses/dependencies/python-dotenv/LICENSE`
+- **pyyaml 6.0.3** — MIT. Files: `licenses/dependencies/pyyaml/LICENSE`
+- **referencing 0.37.0** — MIT. Files: `licenses/dependencies/referencing/COPYING`
+- **rpds-py 2026.9.1** — MIT. Files: `licenses/dependencies/rpds-py/LICENSE`
+- **ruff 0.16.10** — MIT. Files: `licenses/dependencies/ruff/LICENSE`
+- **sqlalchemy 2.1.3** — MIT. Files: `licenses/dependencies/sqlalchemy/LICENSE`
+- **starlette 1.7.0** — BSD-3-Clause. Files: `licenses/dependencies/starlette/LICENSE.md`
+- **typing-inspection 0.4.4** — MIT. Files: `licenses/dependencies/typing-inspection/LICENSE`
+- **typing-extensions 4.16.0** — PSF-2.0. Files: `licenses/dependencies/typing-extensions/LICENSE`
+- **tzdata 2026.5** — Apache-2.0. Files: `licenses/dependencies/tzdata/LICENSE`, `licenses/dependencies/tzdata/LICENSE_APACHE`
+- **uvicorn 0.54.0** — BSD-3-Clause. Files: `licenses/dependencies/uvicorn/LICENSE.md`

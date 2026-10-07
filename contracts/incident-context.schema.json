@@ -1,0 +1,581 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "tenant_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "Tenant Id",
+          "type": "string"
+        },
+        "criticality": {
+          "default": "unknown",
+          "title": "Criticality",
+          "type": "string"
+        },
+        "role": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Role"
+        },
+        "addresses": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 50,
+          "title": "Addresses",
+          "type": "array"
+        },
+        "aliases": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 50,
+          "title": "Aliases",
+          "type": "array"
+        },
+        "lab_asset": {
+          "default": false,
+          "title": "Lab Asset",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "asset_id",
+        "tenant_id"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "ConnectionSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "local_address": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Local Address"
+        },
+        "remote_address": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Remote Address"
+        },
+        "state": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "State"
+        },
+        "process_name": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Process Name"
+        }
+      },
+      "title": "ConnectionSummary",
+      "type": "object"
+    },
+    "Evidence": {
+      "additionalProperties": false,
+      "properties": {
+        "event_uid": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "Event Uid",
+          "type": "string"
+        },
+        "incident_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "Incident Id",
+          "type": "string"
+        },
+        "tenant_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$",
+          "title": "Tenant Id",
+          "type": "string"
+        },
+        "source": {
+          "maxLength": 100,
+          "title": "Source",
+          "type": "string"
+        },
+        "event_time": {
+          "format": "date-time",
+          "title": "Event Time",
+          "type": "string"
+        },
+        "summary": {
+          "maxLength": 8000,
+          "title": "Summary",
+          "type": "string"
+        },
+        "priority": {
+          "default": "UNKNOWN",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical",
+            "UNKNOWN"
+          ],
+          "title": "Priority",
+          "type": "string"
+        },
+        "data_classification": {
+          "const": "UNTRUSTED EVENT DATA",
+          "default": "UNTRUSTED EVENT DATA",
+          "title": "Data Classification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_uid",
+        "incident_id",
+        "tenant_id",
+        "source",
+        "event_time",
+        "summary"
+      ],
+      "title": "Evidence",
+      "type": "object"
+    },
+    "ProcessSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "maxLength": 256,
+          "title": "Name",
+          "type": "string"
+        },
+        "pid": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pid"
+        },
+        "cpu": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cpu"
+        },
+        "ram": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ram"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "ProcessSummary",
+      "type": "object"
+    },
+    "TelemetryContext": {
+      "additionalProperties": false,
+      "properties": {
+        "host": {
+          "maxLength": 256,
+          "title": "Host",
+          "type": "string"
+        },
+        "platform": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Platform"
+        },
+        "agent_id": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Agent Id"
+        },
+        "cpu": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cpu"
+        },
+        "ram": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ram"
+        },
+        "gpu": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gpu"
+        },
+        "temperature": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Temperature"
+        },
+        "processes": {
+          "items": {
+            "$ref": "#/$defs/ProcessSummary"
+          },
+          "maxItems": 30,
+          "title": "Processes",
+          "type": "array"
+        },
+        "network_connections": {
+          "items": {
+            "$ref": "#/$defs/ConnectionSummary"
+          },
+          "maxItems": 30,
+          "title": "Network Connections",
+          "type": "array"
+        },
+        "persistence_observations": {
+          "items": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 30,
+          "title": "Persistence Observations",
+          "type": "array"
+        },
+        "sensor_availability": {
+          "additionalProperties": {
+            "enum": [
+              "available",
+              "unavailable",
+              "unknown"
+            ],
+            "type": "string"
+          },
+          "maxProperties": 30,
+          "title": "Sensor Availability",
+          "type": "object"
+        },
+        "security_risk": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Security Risk"
+        },
+        "resource_impact": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Resource Impact"
+        },
+        "reasons": {
+          "items": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 30,
+          "title": "Reasons",
+          "type": "array"
+        },
+        "last_seen": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Last Seen"
+        },
+        "availability": {
+          "default": "unknown",
+          "enum": [
+            "available",
+            "unavailable",
+            "unknown"
+          ],
+          "title": "Availability",
+          "type": "string"
+        }
+      },
+      "required": [
+        "host"
+      ],
+      "title": "TelemetryContext",
+      "type": "object"
+    },
+    "TimelineItem": {
+      "additionalProperties": false,
+      "properties": {
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "kind": {
+          "maxLength": 100,
+          "title": "Kind",
+          "type": "string"
+        },
+        "summary": {
+          "maxLength": 2000,
+          "title": "Summary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "timestamp",
+        "kind",
+        "summary"
+      ],
+      "title": "TimelineItem",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "data_mode": {
+      "default": "UNKNOWN",
+      "enum": [
+        "REAL",
+        "TEST",
+        "REPLAY",
+        "UNKNOWN"
+      ],
+      "title": "Data Mode",
+      "type": "string"
+    },
+    "telemetry": {
+      "items": {
+        "$ref": "#/$defs/TelemetryContext"
+      },
+      "maxItems": 100,
+      "title": "Telemetry",
+      "type": "array"
+    },
+    "incident_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Incident Id",
+      "type": "string"
+    },
+    "tenant_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "title": "Tenant Id",
+      "type": "string"
+    },
+    "status": {
+      "maxLength": 100,
+      "title": "Status",
+      "type": "string"
+    },
+    "priority": {
+      "maxLength": 100,
+      "title": "Priority",
+      "type": "string"
+    },
+    "summary": {
+      "maxLength": 8000,
+      "title": "Summary",
+      "type": "string"
+    },
+    "assets": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "maxItems": 100,
+      "title": "Assets",
+      "type": "array"
+    },
+    "identity_context": {
+      "items": {
+        "maxLength": 2000,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 100,
+      "title": "Identity Context",
+      "type": "array"
+    },
+    "timeline": {
+      "items": {
+        "$ref": "#/$defs/TimelineItem"
+      },
+      "maxItems": 1000,
+      "title": "Timeline",
+      "type": "array"
+    },
+    "evidence": {
+      "items": {
+        "$ref": "#/$defs/Evidence"
+      },
+      "maxItems": 20000,
+      "title": "Evidence",
+      "type": "array"
+    },
+    "correlation_reasons": {
+      "items": {
+        "maxLength": 2000,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 100,
+      "title": "Correlation Reasons",
+      "type": "array"
+    },
+    "missing_telemetry": {
+      "items": {
+        "maxLength": 2000,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 100,
+      "title": "Missing Telemetry",
+      "type": "array"
+    }
+  },
+  "required": [
+    "incident_id",
+    "tenant_id",
+    "status",
+    "priority",
+    "summary"
+  ],
+  "title": "IncidentContext",
+  "type": "object"
+}

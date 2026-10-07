@@ -1,0 +1,26 @@
+id: SZ-PB-002
+name: Simulate suspension of a named test process
+version: "1.0"
+action_type: SUSPEND_TEST_PROCESS
+steps:
+  - id: validate
+    action: validate_target
+  - id: approve
+    action: human_approval
+    depends_on: [validate]
+  - id: lab_gate
+    action: branch
+    depends_on: [approve]
+    condition:
+      field: parameters.lab_only
+      equals: true
+  - id: execute
+    action: suspend_test_process
+    depends_on: [lab_gate]
+    requires_approval: true
+  - id: verify
+    action: verify_process
+    depends_on: [execute]
+  - id: rollback
+    action: rollback_process
+    depends_on: [verify]

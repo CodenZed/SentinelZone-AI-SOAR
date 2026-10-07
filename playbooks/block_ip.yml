@@ -1,0 +1,20 @@
+id: SZ-PB-001
+name: Simulate source IP block (DRY RUN)
+version: "1.0"
+action_type: BLOCK_IP
+steps:
+  - id: validate
+    action: validate_target
+  - id: approve
+    action: human_approval
+    depends_on: [validate]
+  - id: execute
+    action: windows_firewall_block
+    depends_on: [approve]
+    requires_approval: true
+  - id: verify
+    action: verify_block
+    depends_on: [execute]
+  - id: rollback
+    action: rollback_block
+    depends_on: [verify]
