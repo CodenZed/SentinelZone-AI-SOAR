@@ -1,30 +1,56 @@
 name: acceptance
-on: [push, pull_request]
+
+on:
+  push:
+  pull_request:
+
 jobs:
   test:
     runs-on: ubuntu-latest
+
+    env:
+      TEST_DATABASE_URL: postgresql+psycopg://ai_soar_test:test-only-password@localhost:5432/sentinelzone_ai_soar_test
+      POSTGRES_ADMIN_PASSWORD: test-only-admin-password
+
     services:
       postgres:
         image: postgres:16
         env:
-          POSTGRES_DB: ai_soar_test
+          POSTGRES_DB: sentinelzone_ai_soar_test
           POSTGRES_USER: ai_soar_test
           POSTGRES_PASSWORD: test-only-password
-        ports: ["5432:5432"]
+        ports:
+          - 5432:5432
         options: >-
-          --health-cmd "pg_isready -U ai_soar_test -d ai_soar_test"
-          --health-interval 5s --health-timeout 5s --health-retries 20
+          --health-cmd "pg_isready -U ai_soar_test -d sentinelzone_ai_soar_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install -r requirements.lock.txt
-      - run: python -m pytest -q --tb=short
-        env:
-          TEST_DATABASE_URL: postgresql+psycopg://ai_soar_test:test-only-password@localhost:5432/ai_soar_test
-      - run: node frontend/build.mjs
-      - run: node --test frontend/tests/*.test.mjs
-      - run: docker compose config --quiet
-      - run: docker compose down -v
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.lock.txt
+
+      - name: Run backend tests
+        run: python -m pytest -q --tb=short
+
+      - name: Build frontend
+        run: node frontend/build.mjs
+
+      - name: Run frontend tests
+        run: node --test frontend/tests/*.test.mjs
+
+      - name: Validate Docker Compose
+        run: docker compose config --quiet
+
+      - name: Cleanup Docker Compose
         if: always()
+        run: docker compose down -v
